@@ -1,4 +1,5 @@
 #include "MenuScene.h"
+#include "GameScene.h"
 
 enum class MenuTag
 {
@@ -58,4 +59,31 @@ void MenuScene::initMenu()
 
 void MenuScene::menuCallback(Ref * sender)
 {
+    auto item = reinterpret_cast<MenuItem*>(sender);
+    
+    switch (static_cast<MenuTag>(item->getTag()))
+    {
+        case MenuTag::TAG_MENUITEM_PLAY:
+        {
+            auto scene = TransitionFadeTR::create(1.0, GameScene::createScene());
+            Director::getInstance()->replaceScene(scene);
+        }
+        break;
+            
+        case MenuTag::TAG_MENUITEM_HELP:
+            break;
+            
+        case MenuTag::TAG_MENUITEM_OPTION:
+            break;
+            
+        case MenuTag::TAG_MENUITEM_QUIT:
+            Director::getInstance()->end();
+            
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+            exit(0);
+#endif
+            
+        default:
+            break;
+    }
 }
