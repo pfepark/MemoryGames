@@ -34,6 +34,13 @@ public:
     void setLabelCard();
     void setLabelLife();
     void initCard();
+    
+    void initReady();
+    void initStart();
+    void actionReady();
+    void actionStart();
+    void endReady();
+    void endStart();
 };
 
 #endif /* __GAME_SCENE_H__ */

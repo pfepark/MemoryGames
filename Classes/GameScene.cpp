@@ -120,3 +120,44 @@ void GameScene::initCard()
         this->addChild(sprFont);
     }
 }
+
+void GameScene::initReady()
+{
+    auto label = Label::createWithSystemFont("Ready", "", 80);
+    label->setPosition(Point(winSize.width / 2, winSize.height / 2));
+    label->setTag(static_cast<int>(GameUITag::TAG_LABEL_READY));
+    label->setColor(Color3B::BLACK);
+    label->setScale(0.0);
+    label->addChild(label);
+}
+
+void GameScene::initStart()
+{
+    auto label = Label::createWithSystemFont("START", "", 80);
+    label->setPosition(Point(winSize.width/2, winSize.height/2));
+    label->setTag(static_cast<int>(GameUITag::TAG_LABEL_START));
+    label->setColor(Color3B::BLACK);
+    label->setScale(0.0);
+    label->addChild(label);
+}
+
+void GameScene::actionReady()
+{
+    auto action = Sequence::create(ScaleTo::create(1.0, 1.0),
+                                   DelayTime::create(2.0),
+                                   ScaleTo::create(1.0, 0.0),
+                                   CallFunc::create(CC_CALLBACK_0(GameScene::endReady, this)),
+                                   NULL);
+    auto label = dynamic_cast<Label*>(this->getChildByTag(static_cast<int>(GameUITag::TAG_LABEL_READY)));
+    label->runAction(action);
+}
+
+void GameScene::endReady()
+{
+    actionStart();
+}
+
+void GameScene::actionStart()
+{
+    
+}
